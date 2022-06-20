@@ -11,7 +11,8 @@ function dev {
 		tmux new-session -d
 	fi
 
-	SESSION=${PWD##*/}
+	FOLDER=${PWD##*/}
+	SESSION=$(print -r -- ${FOLDER:gs/\./\_})
 	SESSION_EXISTS=$(tmux list-sessions | grep $SESSION)
 
 	if [ -z "$SESSION_EXISTS" ]
