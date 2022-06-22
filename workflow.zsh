@@ -4,16 +4,9 @@ alias tk='tmux kill-session -t'
 alias tl='tmux list-sessions'
 
 function tn {
-	TMUX=$(pgrep tmux)
-
-	if [ -z $TMUX ]
-	then
-		tmux new-session -d
-	fi
-
 	FOLDER=${PWD##*/}
 	SESSION=$(print -r -- ${FOLDER:gs/\./\_})
-	SESSION_EXISTS=$(tmux list-sessions | grep $SESSION)
+	SESSION_EXISTS=$(tmux list-sessions 2>/dev/null | grep $SESSION)
 
 	if [ -z "$SESSION_EXISTS" ]
 	then
