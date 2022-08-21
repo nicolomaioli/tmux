@@ -6,7 +6,7 @@ alias tpk='tmux kill-server'
 function sn {
 	# Use fzf to select a project folder from a list
 	# TODO: this should take from a parameter instead
-	TARGET=$(find ~/code ~/.config -mindepth 1 -maxdepth 1 -type d | fzf)
+	TARGET=$(find ~/Code ~/.config -mindepth 1 -maxdepth 1 -type d | fzf)
 
 	if [[ -z $TARGET ]]
 	then
