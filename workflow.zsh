@@ -44,14 +44,13 @@ function tn {
 	SESSION_EXISTS=$(tmux list-sessions 2>/dev/null | grep $SESSION)
 
 	# Create the session if it doesn't exists, add two windows:
-	# EDITOR and launch $EDITOR
-	# TERM in the same path at $TARGET
+	# 0: $EDITOR
+	# 1: cd $TARGET
 	if [[ -z $SESSION_EXISTS ]]
 	then
 		tmux new-session -d -s $SESSION -c $TARGET
-		tmux rename-window -t $SESSION:0 'EDITOR'
-		tmux send-keys -t $SESSION:'EDITOR' $EDITOR C-m
-		tmux new-window -t $SESSION:1 -n 'TERM' -c $TARGET
+		tmux send-keys -t $SESSION:0 $EDITOR C-m
+		tmux new-window -t $SESSION:1 -c $TARGET
 	fi
 
 	# Avoid nested sessions
